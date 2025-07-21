@@ -5,6 +5,7 @@ return {
     enabled = true,
     tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' },
+    cmd = "Telescope",
     config = function()
         local telescope = require('telescope')
         local actions = require('telescope.actions')

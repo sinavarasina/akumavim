@@ -1,6 +1,7 @@
 -- lua/core/options.lua
 
 local opt = vim.opt
+local cmd = vim.cmd
 
 opt.number = true
 opt.relativenumber = true
@@ -8,7 +9,6 @@ opt.termguicolors = true
 opt.cursorline = true
 opt.signcolumn = "yes"
 
-opt.fillchars:append("eob:$")
 opt.shortmess:append("sI")
 
 opt.tabstop = 4

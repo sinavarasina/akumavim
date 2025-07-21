@@ -4,6 +4,7 @@ return {
     'akinsho/toggleterm.nvim',
     enabled = true,
     version = "*",
+    cmd = "ToggleTerm",
     opts = {
         size = 20,
         open_mapping = [[<c-t>]],
@@ -28,6 +29,16 @@ return {
             end,
         },
     },
+    keys = {
+        { "<leader>t",  desc = "+Terminal" },
+        { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>",      desc = "Floating" },
+        { "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Horizontal" },
+        { "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>",   desc = "Vertical" },
+        { "<leader>tg", "<cmd>lua _lazygit_toggle()<cr>",           desc = "Lazygit" },
+        { "<leader>tn", "<cmd>ToggleTermGoToNext<cr>",              desc = "Next Terminal" },
+        { "<leader>tp", "<cmd>ToggleTermGoToPrevious<cr>",          desc = "Previous Terminal" },
+        { '<Esc><Esc>', [[<C-\><C-n>]],                             mode = 't',                desc = "Enter Normal Mode" },
+    },
     config = function(_, opts)
         require("toggleterm").setup(opts)
 
@@ -44,8 +55,5 @@ return {
         function _lazygit_toggle()
             lazygit:toggle()
         end
-
-        SetToggleTermKeymaps()
-        SetTerminalKeymaps()
     end,
 }

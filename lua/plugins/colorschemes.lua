@@ -2,15 +2,19 @@
 
 return {
     {
-        "doki-theme/doki-theme-vim",
+        "nyoom-engineering/oxocarbon.nvim",
         enabled = true,
-        config = function()
-            vim.cmd.colorscheme "konata"
-        end,
-
+    },
+    {
+        "doki-theme/doki-theme-vim",
+        enabled = false,
     },
     {
         "4513ECHO/vim-colors-hatsunemiku",
+        enabled = false,
+    },
+    {
+        "folke/tokyonight.nvim",
         enabled = false,
     },
 }

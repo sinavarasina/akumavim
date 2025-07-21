@@ -1,5 +1,4 @@
 -- lua/plugins/explorer.lua
---
 
 return {
     "nvim-neo-tree/neo-tree.nvim",

@@ -51,19 +51,5 @@ end, { desc = "Format Code" })
 
 -- UI
 map("n", "<leader>u", "", { desc = "+UI" })
-map("n", "<leader>uh", "<cmd>Telescope colorscheme<cr>", { desc = "Themes" })
-
--- function
-function SetToggleTermKeymaps()
-    map("n", "<leader>t", "", { desc = "+Terminal" })
-    map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Floating" })
-    map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Horizontal" })
-    map("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Vertical" })
-    map("n", "<leader>tg", "<cmd>lua _lazygit_toggle()<cr>", { desc = "Lazygit" })
-    map("n", "<leader>tn", "<cmd>ToggleTermGoToNext<cr>", { desc = "Next Terminal" })
-    map("n", "<leader>tp", "<cmd>ToggleTermGoToPrevious<cr>", { desc = "Previous Terminal" })
-end
-
-function SetTerminalKeymaps()
-    map('t', '<Esc><Esc>', [[<C-\><C-n>]], { desc = "Enter Normal Mode" })
-end
+map("n", "<Leader>uh", "<cmd>Alpha<cr>", { desc = "Homepage (Alpha)" })
+map("n", "<leader>ut", "<cmd>Telescope colorscheme<cr>", { desc = "Themes" })
