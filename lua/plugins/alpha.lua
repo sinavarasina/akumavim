@@ -2,6 +2,7 @@
 
 return {
     'goolord/alpha-nvim',
+    enabled = true,
     event = "VimEnter",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
