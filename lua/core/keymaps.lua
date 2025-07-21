@@ -27,7 +27,7 @@ map("n", "<A-l>", ":vertical resize +2<CR>", { desc = "Increase Width" })
 map("n", "<A-h>", ":vertical resize -2<CR>", { desc = "Decrease Width" })
 
 -- fix overlapping keymap
-map({"n", "v"}, "<leader>C", "gcc", { desc = "Toggle Comment" })
+map({ "n", "v" }, "<leader>C", "gcc", { desc = "Toggle Comment" })
 map("n", "<leader>Cl", "gcc", { desc = "Toggle Comment Line" })
 
 -- NeoTree
@@ -37,19 +37,33 @@ map("n", "<leader>ef", "<cmd>Neotree toggle position=float<cr>", { desc = "Float
 map("n", "<leader>ew", "<cmd>Neotree toggle position=current<cr>", { desc = "Netrw Style" })
 
 -- Action
-map("n", "<leader>F", "", { desc = "+File" })
-map("n", "<leader>Fw", "<cmd>w<cr>", { desc = "Write" })
-map("n", "<leader>FW", "<cmd>wa<cr>", { desc = "Write All" })
-map("n", "<leader>Fq", "<cmd>q<cr>", { desc = "Quit" })
-map("n", "<leader>FQ", "<cmd>qa!<cr>", { desc = "Quit All (Force)" })
+map("n", "<leader>f", "", { desc = "+File" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find File" })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find by Grep" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find in Buffers" })
+map("n", "<leader>fw", "<cmd>w<cr>", { desc = "Write" })
+map("n", "<leader>fW", "<cmd>wa<cr>", { desc = "Write All" })
+map("n", "<leader>fq", "<cmd>q<cr>", { desc = "Quit" })
+map("n", "<leader>fQ", "<cmd>qa!<cr>", { desc = "Quit All (Force)" })
+map("n", "<leader>fc", function()
+    require("conform").format()
+end, { desc = "Format Code" })
+
+-- UI
+map("n", "<leader>u", "", { desc = "+UI" })
+map("n", "<leader>uh", "<cmd>Telescope colorscheme<cr>", { desc = "Themes" })
 
 -- function
 function SetToggleTermKeymaps()
-  map("n", "<leader>t", "", { desc = "+Terminal" })
-  map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Floating" })
-  map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Horizontal" })
-  map("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Vertical" })
-  map("n", "<leader>tg", "<cmd>lua _lazygit_toggle()<cr>", { desc = "Lazygit" })
-  map("n", "<leader>tn", "<cmd>ToggleTermGoToNext<cr>", { desc = "Next Terminal" })
-  map("n", "<leader>tp", "<cmd>ToggleTermGoToPrevious<cr>", { desc = "Previous Terminal" })
+    map("n", "<leader>t", "", { desc = "+Terminal" })
+    map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Floating" })
+    map("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Horizontal" })
+    map("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Vertical" })
+    map("n", "<leader>tg", "<cmd>lua _lazygit_toggle()<cr>", { desc = "Lazygit" })
+    map("n", "<leader>tn", "<cmd>ToggleTermGoToNext<cr>", { desc = "Next Terminal" })
+    map("n", "<leader>tp", "<cmd>ToggleTermGoToPrevious<cr>", { desc = "Previous Terminal" })
+end
+
+function SetTerminalKeymaps()
+    map('t', '<Esc><Esc>', [[<C-\><C-n>]], { desc = "Enter Normal Mode" })
 end
