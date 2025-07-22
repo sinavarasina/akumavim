@@ -27,8 +27,8 @@ map("n", "<A-l>", ":vertical resize +2<CR>", { desc = "Increase Width" })
 map("n", "<A-h>", ":vertical resize -2<CR>", { desc = "Decrease Width" })
 
 -- fix overlapping keymap
-map({ "n", "v" }, "<leader>C", "gcc", { desc = "Toggle Comment" })
-map("n", "<leader>Cl", "gcc", { desc = "Toggle Comment Line" })
+-- map({ "n", "v" }, "<leader>C", "gcc", { desc = "Toggle Comment" })
+-- map("n", "<leader>Cl", "gcc", { desc = "Toggle Comment Line" })
 
 -- NeoTree
 map("n", "<leader>e", "", { desc = "+Explorer" })
@@ -45,9 +45,18 @@ map("n", "<leader>fw", "<cmd>w<cr>", { desc = "Write" })
 map("n", "<leader>fW", "<cmd>wa<cr>", { desc = "Write All" })
 map("n", "<leader>fq", "<cmd>q<cr>", { desc = "Quit" })
 map("n", "<leader>fQ", "<cmd>qa!<cr>", { desc = "Quit All (Force)" })
-map("n", "<leader>fc", function()
+
+-- Code
+map("n", "<leader>c", "", { desc = "+Code" })
+map("n", "<leader>cf", function()
     require("conform").format()
 end, { desc = "Format Code" })
+
+-- Compiler
+--  map("n", "<leader>co", "<cmd>CompilerOpen<cr>", { desc = "Compiler Open" })
+--  map("n", "<leader>ct", "<cmd>CompilerToggleResults<cr>", { desc = "Compiler Toggle Results" })
+--  map("n", "<leader>cl", "<cmd>CompilerRedo<cr>", { desc = "Compiler Last Task" })
+--  map("n", "<leader>cs", "<cmd>CompilerStop<cr>", { desc = "Compiler Stop Tasks" })
 
 -- UI
 map("n", "<leader>u", "", { desc = "+UI" })
