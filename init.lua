@@ -1,7 +1,7 @@
 -- init.lua
 
 -- Core Preload
-require("core.options")
+require("core.preload-opts")
 require("core.keymaps")
 require("core.autocmds")
 
@@ -9,4 +9,4 @@ require("core.autocmds")
 require("config.lazy")
 
 -- Core After Load
-require("core.afterload")
+require("core.afterload-opts")

@@ -1,4 +1,4 @@
--- lua/core/options.lua
+-- lua/core/preload-opts.lua
 
 local opt = vim.opt
 local cmd = vim.cmd

@@ -1,4 +1,4 @@
--- lua/core/afterload.lua
+-- lua/core/afterload-opts.lua
 
 local opt = vim.opt
 local cmd = vim.cmd
