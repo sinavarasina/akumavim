@@ -27,6 +27,7 @@ return {
             indent = {
                 enable = true,
             },
+            folding = true,
         },
     }
 }

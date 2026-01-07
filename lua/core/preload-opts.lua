@@ -2,6 +2,7 @@
 
 local opt = vim.opt
 local cmd = vim.cmd
+local api = vim.api
 
 opt.number = true
 opt.relativenumber = true

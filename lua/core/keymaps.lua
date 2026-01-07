@@ -51,6 +51,8 @@ map("n", "<leader>c", "", { desc = "+Code" })
 map("n", "<leader>cf", function()
     require("conform").format()
 end, { desc = "Format Code" })
+map("n", "<leader>cn", vim.lsp.buf.rename, { desc = "Rename Variable" })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 
 -- Compiler
 --  map("n", "<leader>co", "<cmd>CompilerOpen<cr>", { desc = "Compiler Open" })
@@ -63,7 +65,20 @@ map("n", "<leader>u", "", { desc = "+UI" })
 map("n", "<Leader>uh", "<cmd>Alpha<cr>", { desc = "Homepage (Alpha)" })
 map("n", "<leader>ut", "<cmd>Telescope colorscheme<cr>", { desc = "Themes" })
 
--- Debugger (DAP)
+-- inlay diagnostic
+map("n", "<leader>ui", function()
+    local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+
+    vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = 0 })
+
+    if not is_enabled then
+        vim.notify("Inlay Hints: ON", vim.log.levels.INFO)
+    else
+        vim.notify("Inlay Hints: OFF", vim.log.levels.WARN)
+    end
+end, { desc = "Toggle Inlay Hints" })
+
+-- Debugger (DAP) -->
 map("n", "<leader>d", "", { desc = "+Debug" })
 map("n", "<leader>db", function() require('dap').toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
 map("n", "<leader>dc", function() require('dap').continue() end, { desc = "Continue" })
@@ -72,3 +87,38 @@ map("n", "<leader>di", function() require('dap').step_into() end, { desc = "Step
 map("n", "<leader>du", function() require('dap').step_out() end, { desc = "Step Out" })
 map("n", "<leader>dt", function() require('dap').terminate() end, { desc = "Terminate" })
 map("n", "<leader>dr", function() require('dap').repl.open() end, { desc = "Open REPL" })
+--<
+
+
+-- Diagnostics & LSP Navigation -->
+map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help (Params)" })
+
+map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
+map("n", "gr", vim.lsp.buf.references, { desc = "Go to References" })
+
+
+map("n", "<leader>dd", vim.diagnostic.setloclist, { desc = "Show All Diagnostics" })
+map("n", "<leader>de", vim.diagnostic.open_float, { desc = "Show Diagnostic Under Cursor" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+
+local inlay_enabled = true
+map("n", "<leader>ui", function()
+    inlay_enabled = not inlay_enabled
+    vim.lsp.inlay_hint.enable(inlay_enabled)
+    if inlay_enabled then
+        vim.notify("Inlay Hints: ON", vim.log.levels.INFO)
+    else
+        vim.notify("Inlay Hints: OFF", vim.log.levels.WARN)
+    end
+end, { desc = "Toggle Inlay Hints" })
+--<
+
+
+-- Fold
+map('n', 'za', 'za', { desc = 'Toggle fold' })
+map('n', 'zM', 'zM', { desc = 'Close all folds' })
+map('n', 'zR', 'zR', { desc = 'Open all folds' })
