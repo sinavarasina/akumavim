@@ -8,6 +8,7 @@ return {
         dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
         config = function()
             local dap, dapui = require("dap"), require("dapui")
+
             dapui.setup({
                 layouts = {
                     {
@@ -30,11 +31,23 @@ return {
                     },
                 },
             })
-            dap.listeners.before.attach.dapui_config = function() dapui.open() end
-            dap.listeners.before.launch.dapui_config = function() dapui.open() end
-            dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
-            dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
-        end
+
+            dap.listeners.before.attach.dapui_config = function()
+                dapui.open()
+            end
+
+            dap.listeners.before.launch.dapui_config = function()
+                dapui.open()
+            end
+
+            dap.listeners.before.event_terminated.dapui_config = function()
+                dapui.close()
+            end
+
+            dap.listeners.before.event_exited.dapui_config = function()
+                dapui.close()
+            end
+        end,
     },
 
     {
@@ -56,7 +69,9 @@ return {
     {
         "williamboman/mason.nvim",
         enabled = true,
-        config = function() require("mason").setup() end,
+        config = function()
+            require("mason").setup()
+        end,
     },
 
     {
@@ -70,12 +85,7 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             local mason_lspconfig = require("mason-lspconfig")
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-            local handlers = {
-                ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-                ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-            }
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             mason_lspconfig.setup({
                 ensure_installed = { "lua_ls", "clangd", "rust_analyzer", "ts_ls" },
@@ -83,17 +93,17 @@ return {
                     function(server_name)
                         lspconfig[server_name].setup({
                             capabilities = capabilities,
-                            handlers = handlers,
                         })
                     end,
 
                     ["lua_ls"] = function()
                         lspconfig.lua_ls.setup({
                             capabilities = capabilities,
-                            handlers = handlers,
                             settings = {
                                 Lua = {
-                                    diagnostics = { globals = { "vim" } },
+                                    diagnostics = {
+                                        globals = { "vim" },
+                                    },
                                     workspace = {
                                         checkThirdParty = false,
                                         library = {
@@ -101,8 +111,12 @@ return {
                                             vim.fn.stdpath("config") .. "/lua",
                                         },
                                     },
-                                    telemetry = { enable = false },
-                                    hint = { enable = true },
+                                    telemetry = {
+                                        enable = false,
+                                    },
+                                    hint = {
+                                        enable = true,
+                                    },
                                 },
                             },
                         })
@@ -111,14 +125,21 @@ return {
                     ["rust_analyzer"] = function()
                         lspconfig.rust_analyzer.setup({
                             capabilities = capabilities,
-                            handlers = handlers,
                             settings = {
                                 ["rust-analyzer"] = {
                                     inlayHints = {
-                                        bindingModeHints = { enable = true },
-                                        chainingHints = { enable = true },
-                                        closureReturnTypeHints = { enable = "always" },
-                                        parameterHints = { enable = true },
+                                        bindingModeHints = {
+                                            enable = true,
+                                        },
+                                        chainingHints = {
+                                            enable = true,
+                                        },
+                                        closureReturnTypeHints = {
+                                            enable = "always",
+                                        },
+                                        parameterHints = {
+                                            enable = true,
+                                        },
                                         typeHints = {
                                             enable = true,
                                             hideClosureInitialization = false,
@@ -140,24 +161,26 @@ return {
                                         enable = true,
                                     },
                                     completion = {
-                                        autoimport = { enable = true },
-                                        postfix = { enable = true },
+                                        autoimport = {
+                                            enable = true,
+                                        },
+                                        postfix = {
+                                            enable = true,
+                                        },
                                         addCallParenthesis = true,
                                     },
                                     assist = {
                                         importGranularity = "module",
                                         importPrefix = "by_self",
                                     },
-                                }
-                            }
+                                },
+                            },
                         })
                     end,
-
 
                     ["clangd"] = function()
                         lspconfig.clangd.setup({
                             capabilities = capabilities,
-                            handlers = handlers,
                             cmd = {
                                 "clangd",
                                 "--background-index",
@@ -178,20 +201,19 @@ return {
                     ["ts_ls"] = function()
                         lspconfig.ts_ls.setup({
                             capabilities = capabilities,
-                            handlers = handlers,
                             settings = {
                                 javascript = {
                                     inlayHints = {
                                         includeInlayParameterNameHints = "all",
                                         includeInlayFunctionParameterTypeHints = true,
-                                    }
+                                    },
                                 },
                                 typescript = {
                                     inlayHints = {
                                         includeInlayParameterNameHints = "all",
                                         includeInlayFunctionParameterTypeHints = true,
-                                    }
-                                }
+                                    },
+                                },
                             },
                         })
                     end,
@@ -232,12 +254,12 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ['<Tab>'] = cmp.mapping.select_next_item(),
-                    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                    ['<C-Tab>'] = cmp.mapping.close(),
-                    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+                    ["<Tab>"] = cmp.mapping.select_next_item(),
+                    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    ["<C-Tab>"] = cmp.mapping.close(),
+                    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(4),
                 }),
             })
         end,
